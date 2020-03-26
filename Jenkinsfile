@@ -89,7 +89,7 @@ stage ("Appscan"){
 	echo "(*****)"
 	  echo "${UUID}"
 	
-	  echo "Demo1234 ${JPetStoreComponent_VersionId}"
+	  echo "Demo1234 ${JPetStore_JitendraComponent_VersionId}"
 	  def newComponentVersionId = "${JPetStore_JitendraComponent_VersionId}"
 	  step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "JPetStore", requestor: "admin", id: "${newComponentVersionId}" )
 	  echo "Demo123 ${newComponentVersionId}"
