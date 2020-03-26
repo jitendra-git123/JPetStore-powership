@@ -3,7 +3,7 @@ node {
 	def GIT_COMMIT
   stage ('cloning the repository'){
 	  
-      def scm = git 'https://github.com/hclpowership/JPetstore'
+      def scm = git 'https://github.com/jitendra-git123/JPetStore-powership'
 	  GIT_COMMIT = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
 	  echo "AAAA ${GIT_COMMIT}"
 	  //echo "BBBB ${scm}"
@@ -63,11 +63,11 @@ stage ("Appscan"){
         siteName: 'ucd-server',
         component: [
             $class: 'com.urbancode.jenkins.plugins.ucdeploy.VersionHelper$VersionBlock',
-            componentName: 'JPetStoreComponent',
+            componentName: 'JPetStore_JitendraComponent',
             createComponent: [
                 $class: 'com.urbancode.jenkins.plugins.ucdeploy.ComponentHelper$CreateComponentBlock',
                 componentTemplate: '',
-                componentApplication: 'JPetStore'
+                componentApplication: 'JPetStore_Jitendra'
             ],
             delivery: [
                 $class: 'com.urbancode.jenkins.plugins.ucdeploy.DeliveryHelper$Push',
@@ -90,20 +90,20 @@ stage ("Appscan"){
 	  echo "${UUID}"
 	
 	  echo "Demo1234 ${JPetStoreComponent_VersionId}"
-	  def newComponentVersionId = "${JPetStoreComponent_VersionId}"
+	  def newComponentVersionId = "${JPetStore_JitendraComponent_VersionId}"
 	  step($class: 'UploadBuild', tenantId: "5ade13625558f2c6688d15ce", revision: "${GIT_COMMIT}", appName: "JPetStore", requestor: "admin", id: "${newComponentVersionId}" )
 	  echo "Demo123 ${newComponentVersionId}"
 	sleep 25
 	  step([$class: 'UCDeployPublisher',
 		deploy: [ createSnapshot: [deployWithSnapshot: true, 
 			 snapshotName: "1.${BUILD_NUMBER}"],
-			 deployApp: 'JPetStore', 
+			 deployApp: 'JPetStore_Jitendra', 
 			 deployDesc: 'Requested from Jenkins', 
-			 deployEnv: 'JPetStore_Dev', 
+			 deployEnv: 'JPetStore_Jitendra_Dev', 
 			 deployOnlyChanged: false, 
 			 deployProc: 'Deploy', 
 			 deployReqProps: '', 
-			 deployVersions: "JPetStoreComponent:1.${BUILD_NUMBER}"], 
+			 deployVersions: "JPetStore_JitendraComponent:1.${BUILD_NUMBER}"], 
 		siteName: 'ucd-server'])
  }
 
